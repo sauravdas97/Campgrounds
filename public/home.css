@@ -1,0 +1,76 @@
+body{
+  background: black;
+}
+
+#header{
+  z-index: 1;   /* z-index with a value of 1 means that it will put all the content over anything else like in a 3D space */
+  /* anything smaller than the value of z-index will show behind the header*/
+  position: relative; /* to use z-index we need to give a position value of 1 */
+  padding-top: 10%;
+  text-align: center;
+}
+#header h1{
+  color: white;
+}
+.slideshow{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.slideshow li{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover; /* this will take up the whole page */
+  background-position: 50% 50%; /* this will center the image perfectly */
+  background-repeat: no-repeat;
+  opacity: 0;
+  z-index: 0;
+  animation: imageAnimation 50s linear infinite;
+}
+
+.slideshow li:nth-child(1) {
+  background-image: url(http://i.imgur.com/K3mPv14.jpg)
+}
+.slideshow li:nth-child(2) {
+  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  animation-delay: 10s;
+}
+.slideshow li:nth-child(3) {
+  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  animation-delay: 20s;
+}
+.slideshow li:nth-child(4) {
+  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  animation-delay: 30s;
+}
+.slideshow li:nth-child(5) {
+  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  animation-delay: 40s;
+}
+
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    animation-timing-function: ease-in;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  20% {
+    opacity: 1
+  }
+  30% {
+    opacity: 0
+  }
+}

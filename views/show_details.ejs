@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="/style.css">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <!-- ============== NAVBAR ============== -->
+        <nav class="navbar navbar-default">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">YelpCamp</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="#">Link</a></li>
+
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <%if(!currentUser){%>
+                  <li><a href="/login">Login</a></li>
+                  <li><a href="/register">Sign Up</a></li>
+                <%}else{%>
+                  <li><a href="#"><%=currentUser.username%></a></li>
+                  <li><a href="/logout">Logout</a></li>
+                <%}%>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <h3><%=message%></h3>
+<!-- =============================================== -->
+
+     <div class="container">
+       <div class="row">
+
+         <div class="col-md-3">
+           <p class="lead">Yelpcamp</p>
+           <div class="list-group">
+             <li class="list-group-item active">item 1</li>
+             <li class="list-group-item active">item 1</li>
+             <li class="list-group-item active">item 1</li>
+           </div>
+         </div>
+
+         <div class="col-md-9">
+           <div class="thumbnail">
+             <img class="img-responsive" src=<%=camps.image%>>
+             <div class="caption-full">
+               <h4 class="pull-right">$9.00/night</h4>
+               <h1><a><%=camps.name%></a></h1>
+               <p><%=camps.description%></p>
+               <a class="btn btn-warning" href="/campgrounds/<%=camps._id%>/edit">Edit</a>
+               <form id="delete" action="/campgrounds/<%=camps._id%>?_method=DELETE" method="post">
+                 <button class="btn btn-danger">Delete</button>
+               </form>
+             </div>
+           </div>
+           <div class="well">
+             <h3>Comments</h3>
+             <div class="text-right">
+               <a href="/campgrounds/<%=camps._id%>/comments/new" class="btn btn-success">Add a new Comment</a>
+             </div>
+             <hr>
+             <% for(var i =0;i<camps.comments.length;i++){ %>
+               <div class="row">
+                 <div class="col-md-12">
+                   <strong><%=camps.comments[i].author%></strong>
+                   <span class="pull-right">10 days ago</span>
+                   <p><%=camps.comments[i].text%></p>
+                   <form action="/campgrounds/<%=camps._id%>/comments/<%=camps.comments[i]._id%>?_method=DELETE" method="POST">
+                     <button class="btn btn-primary">Delete</button>
+                   </form>
+                 </div>
+               </div>
+               <%}%>
+           </div>
+         </div>
+
+       </div>
+     </div>
+
+  </body>
+</html>

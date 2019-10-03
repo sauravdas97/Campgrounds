@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>YelpCamp | Campgrounds</title>
+  </head>
+
+  <body>
+    <!-- ============== NAVBAR ============== -->
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">YelpCamp</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Link</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <%if(!currentUser){%>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/register">Sign Up</a></li>
+            <%}else{%>
+              <li><a href="#"><%=currentUser.username%></a></li>
+              <li><a href="/logout">Logout</a></li>
+            <%}%>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <%if(message && message.length>0){%>
+      <div class="container alert alert-danger" role="alert">
+        <%= message %>
+      </div>
+    <%}%>
+
+<!-- ============== JUMBOTRON ============== -->
+    <div class="container">
+      <header class="jumbotron">
+        <h1>Welcome to our camp grounds</h1>
+        <p>View our hand picked camp grounds from all over the world</p>
+        <p>
+          <a class="btn btn-primary" href="/campgrounds/new" role="button">Add new</a>
+        </p>
+      </header>
+
+<!-- ============== IMAGES ============== -->
+      <div class="container">
+        <div class="row text-center" style="display:flex; flex-wrap:; wrap;">
+          <%for(var i=0;i<camp.length;i++){%>
+          <div class="col-md-4">
+            <img src=<%=camp[i].image%> class="img-thumbnail">
+            <div class="caption">
+              <h4><%=camp[i].name%></h4>
+            </div>
+            <p>
+              <a href="/campgrounds/<%= camp[i]._id %>" class="btn btn-primary">More Info</a>
+            </p>
+          </div>
+          <%}%>
+        </div>
+      </div>
+    </div>
+
+
+    <p>Trademark YelpCamp 2019 </p>
+  </body>
+</html>
